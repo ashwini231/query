@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h2>Query Generator</h2>
+
+		<form action="#" th:action="@{/generateQuery}" th:object="${table}"
+			method="POST">
+			<input type="text" th:field="*{tableName}"
+				placeholder="Table Name" class="form-control mb-4 col-4">
+				
+		<table border="1">
+		<tbody>
+		<tr th:each="tdata : ${data}">
+			<td th:text="${tdata.column_name}"></td>
+			<td th:text="${tdata.data_type}"></td>
+		</tr>
+		</tbody>
+		</table>
+		<br>		
+				<button type="submit" class="btn btn-info col-2">Generate Query</button>			
+		</form>
+
+		</div>
+</body>
+</html>
