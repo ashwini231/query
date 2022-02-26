@@ -19,6 +19,4 @@ public class TableMetaData {
 	public String getColumnName(){
 		return column_name;
 	}
-	
-	
 }
