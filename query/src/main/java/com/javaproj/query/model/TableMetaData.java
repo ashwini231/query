@@ -19,4 +19,8 @@ public class TableMetaData {
 	public String getColumnName(){
 		return column_name;
 	}
+	public void setColumnName(String column_name){
+		this.column_name=column_name;
+	}
 }
+
