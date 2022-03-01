@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaproj.query.model.*;
-import com.javaproj.query.repository.TableDataRepository;
+import com.javaproj.query.repository.*;
 
 @Service
 public class QueryServiceImpl implements QueryService{
 	@Autowired
 	private TableDataRepository tabledataRepository ;
+	@Autowired
+	private TablesRepository tablesRepository ;
 	
 	public String getFinalField(Table table){
 		String str="";
@@ -60,10 +62,12 @@ public class QueryServiceImpl implements QueryService{
 	public void generateQuery(Table table){
 		String sql="select "+getFinalField(table)+" from "+table.getTableName()+getWhereCondition(table)+getOrderBy(table)+";";
 		table.setResultQuery(sql);
-		System.out.println(table.getColumnName());
 	}
 	
 	public List<TableMetaData> allTableMetaData(Table table){
 		return tabledataRepository.findAllData(table.getTableName());
+	}
+	public List<Tables> allTables(){
+		return tablesRepository.findAllTables();
 	}
 }

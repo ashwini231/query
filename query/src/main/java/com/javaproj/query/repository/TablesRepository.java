@@ -1,15 +1,14 @@
 package com.javaproj.query.repository;
 
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import com.javaproj.query.model.*;
 
 @Repository
-public interface TableDataRepository extends JpaRepository<TableMetaData, String>{
-	@Query(value = "SELECT column_name, data_type from INFORMATION_SCHEMA.COLUMNS where table_name = ?1", nativeQuery = true)
-    List<TableMetaData> findAllData(String tableName);
-
+public interface TablesRepository extends JpaRepository<Tables, String>{
+	
+	@Query(value = "SELECT table_name FROM information_schema.tables WHERE table_schema='ashwini'",nativeQuery = true )
+	List<Tables> findAllTables();
 }

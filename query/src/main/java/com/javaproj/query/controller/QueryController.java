@@ -26,6 +26,8 @@ public class QueryController {
 	public String showQuery(Model model) {
 		Table table = new Table();
 		model.addAttribute("table", table);
+		List<Tables> tables= queryService.allTables();
+		model.addAttribute("tables",tables);
 		return "main";
 	}
 	

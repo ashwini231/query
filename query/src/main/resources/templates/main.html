@@ -11,12 +11,14 @@
 <body>
 <div class="container">
 		<h2>Query Generator</h2>
-
+		<h5>Select Table Name</h5>
 		<form action="#" th:action="@{/select}" th:object="${table}"
 			method="POST">
-			<input type="text" th:field="*{tableName}"
-				placeholder="Table Name" class="form-control mb-4 col-4">
-			<br><button type="submit" class="btn btn-info col-2">Submit</button>
+			<select th:field="*{tableName}">
+                <option value=""> -- </option>
+                <option th:each="table : ${tables}" th:value="${table.tableName}" th:utext="${table.tableName}"/>
+         </select>
+		<br><br><button type="submit" class="btn btn-info col-2">Submit</button>
 		</form>
 		</div>
 </body>
