@@ -20,13 +20,71 @@
 		<table border="1">
 		<tbody>
 		<tr th:each="tdata : ${data}">
-			<td><input type="checkbox" th:text="${tdata.column_name}" th:checked="*{flag}" th:field="*{fieldName}" th:value="${tdata.column_name}"></td>
+			<td><input type="checkbox" th:text="${tdata.column_name}" th:field="*{fieldName}" th:value="${tdata.column_name}"></td>
 			<td th:text="${tdata.data_type}"></td>
+			<td><input type="text" th:field="*{aliasName}" placeholder="Alias Name"></td>
 		</tr>
 		</tbody>
 		</table>
-		<br>		
-				<button type="submit" class="btn btn-info col-2">Generate Query</button>			
+		<br>Condition<br><br>
+		<table border="1">
+		<tbody>
+		<tr>
+		<th>Column Name</th>
+		<th>Operator</th>
+		<th>Value</th>
+		</tr>
+		<tr>
+		<td>
+		<select th:field="*{columnName}">
+                <option value=""> -- </option>
+                <option th:each="tdata : ${data}" th:value="${tdata.column_name}" th:utext="${tdata.column_name}"/>
+         </select></td>
+         <td>
+         <select th:field="*{operator}">
+         	<option value="">--</option>
+         	<option value=" = "> = </option>
+         	<option value=" > "> > </option>
+         	<option value=" >= "> >= </option>
+         	<option value=" < "> < </option>
+         	<option value=" <= "> <= </option>
+         	<option value=" != "> != </option>
+         	<option value=" <=> "> <=> </option>
+         </select>
+         </td>
+         <td>
+         <input type="text" th:field="*{value}" placeholder="Value">
+         </td>
+         </tr>
+         </tbody>
+         </table>
+         
+         <br>Order<br><br>
+		<table border="1">
+		<tbody>
+		<tr>
+		<th>Column Name</th>
+		<th>Order</th>
+		</tr>
+		<tr>
+		<td>
+		<select th:field="*{orderColumn}">
+                <option value=""> -- </option>
+                <option th:each="tdata : ${data}" th:value="${tdata.column_name}" th:utext="${tdata.column_name}"/>
+         </select></td>
+         <td>
+         <select th:field="*{orderValue}">
+         	<option value="">--</option>
+         	<option value=" ASC "> ASC </option>
+         	<option value=" DESC "> DESC </option>
+         </select>
+         </td>
+         </tr>
+         </tbody>
+         </table>
+		<br>
+				
+		<br><button type="submit" class="btn btn-info col-2">Generate Query</button>			
 		</form>
 
 		</div>

@@ -6,5 +6,5 @@ import com.javaproj.query.model.*;
 
 public interface QueryService {
 	void generateQuery(Table table);
-	 List<TableMetaData> allTableMetaData();
+	 List<TableMetaData> allTableMetaData(Table table);
 }

@@ -26,10 +26,14 @@ public class QueryController {
 	public String showQuery(Model model) {
 		Table table = new Table();
 		model.addAttribute("table", table);
-		List<TableMetaData> data= queryService.allTableMetaData();
+		return "main";
+	}
+	
+	@PostMapping("/select")
+	public String selecty(@ModelAttribute("table") Table table, Model model) {
+		List<TableMetaData> data= queryService.allTableMetaData(table);
 		model.addAttribute("data",data);
 		return "index";
-		
 	}
 	
 	@PostMapping("/generateQuery")
