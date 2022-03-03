@@ -9,6 +9,6 @@ import com.javaproj.query.model.*;
 @Repository
 public interface TablesRepository extends JpaRepository<Tables, String>{
 	
-	@Query(value = "SELECT table_name FROM information_schema.tables WHERE table_schema='ashwini'",nativeQuery = true )
-	List<Tables> findAllTables();
+	@Query(value = "SELECT table_name FROM information_schema.tables WHERE table_schema= ?1",nativeQuery = true )
+	List<Tables> findAllTables(String dbname);
 }

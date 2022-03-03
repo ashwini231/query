@@ -21,18 +21,25 @@ public class QueryController {
 	
 	@Autowired
 	private QueryService queryService;
-
+	
 	@GetMapping("/")
-	public String showQuery(Model model) {
+	public String home(Model model){
+		Database database = new Database();
+		model.addAttribute("database", database);
+		return "home";
+	}
+
+	@PostMapping("/tableName")
+	public String showTables(@ModelAttribute("database") Database database,Model model) {
 		Table table = new Table();
 		model.addAttribute("table", table);
-		List<Tables> tables= queryService.allTables();
+		List<Tables> tables= queryService.allTables(database);
 		model.addAttribute("tables",tables);
 		return "main";
 	}
 	
 	@PostMapping("/select")
-	public String selecty(@ModelAttribute("table") Table table, Model model) {
+	public String select(@ModelAttribute("table") Table table, Model model) {
 		List<TableMetaData> data= queryService.allTableMetaData(table);
 		model.addAttribute("data",data);
 		return "index";
@@ -41,6 +48,11 @@ public class QueryController {
 	@PostMapping("/generateQuery")
 	public String generateQuery(@ModelAttribute("table") Table table) {
 		queryService.generateQuery(table);
+		return "result";
+	}
+	@PostMapping("/testQuery")
+	public String testQuery(@ModelAttribute("table") Table table) {
+		queryService.testQuery(table);
 		return "result";
 	}
 }

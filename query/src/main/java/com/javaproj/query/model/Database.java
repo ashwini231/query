@@ -5,9 +5,9 @@ public class Database {
 	private String username;
 	private String password;
 	private String dbname;
-	private int portno;
+	private String portno;
 	
-	public String getIP(){
+	public String getIp(){
 		return ip;
 	}
 	public String getUsername(){
@@ -16,13 +16,13 @@ public class Database {
 	public String getPassword(){
 		return password;
 	}
-	public String getDBname(){
+	public String getDbname(){
 		return dbname;
 	}
-	public int getPort(){
+	public String getPortno(){
 		return portno;
 	}
-	public void setIP(String ip){
+	public void setIp(String ip){
 		this.ip=ip;
 	}
 	public void setUsername(String username){
@@ -31,10 +31,10 @@ public class Database {
 	public void setPassword(String password){
 		this.password=password;
 	}
-	public void setDBname(String dbname){
+	public void setDbname(String dbname){
 		this.dbname=dbname;
 	}
-	public void setPort(int portno){
+	public void setPortno(String portno){
 		this.portno=portno;
 	}
 	

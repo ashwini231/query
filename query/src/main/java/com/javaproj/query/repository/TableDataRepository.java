@@ -9,7 +9,7 @@ import com.javaproj.query.model.*;
 
 @Repository
 public interface TableDataRepository extends JpaRepository<TableMetaData, String>{
-	@Query(value = "SELECT column_name, data_type from INFORMATION_SCHEMA.COLUMNS where table_name = ?1", nativeQuery = true)
+	@Query(value = "SELECT column_name, data_type from INFORMATION_SCHEMA.COLUMNS where table_name = ?1",nativeQuery = true)
     List<TableMetaData> findAllData(String tableName);
 
 }

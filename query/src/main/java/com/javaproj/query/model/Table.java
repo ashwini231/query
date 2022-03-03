@@ -6,10 +6,12 @@ public class Table {
 	private String aliasName;
 	private String columnName;
 	private String operator;
+	private String logicaloperator;
 	private String value;
 	private String resultQuery;
 	private String orderColumn;
 	private String orderValue;
+	private String errormsg;
 	public boolean flag;
 	
 	public String getTableName() {
@@ -27,6 +29,9 @@ public class Table {
 	public String getOperator() {
 		return operator;
 	}
+	public String getLogicaloperator() {
+		return logicaloperator;
+	}
 	public String getValue() {
 		return value;
 	}
@@ -35,6 +40,9 @@ public class Table {
 	}
 	public String getOrderValue() {
 		return orderValue;
+	}
+	public String getErrormsg() {
+		return errormsg;
 	}
 	public String getResultQuery() {
 		return resultQuery;
@@ -56,6 +64,9 @@ public class Table {
 	public void setOperator(String operator) {
 		this.operator=operator;
 	}
+	public void setLogicaloperator(String logicaloperator) {
+		this.logicaloperator=logicaloperator;
+	}
 	public void setValue(String value) {
 		this.value=value;
 	}
@@ -64,6 +75,9 @@ public class Table {
 	}
 	public void setOrderValue(String orderValue) {
 		this.orderValue=orderValue;
+	}
+	public void setErrormsg(String errormsg) {
+		this.errormsg=errormsg;
 	}
 	public void setResultQuery(String resultQuery) {
 		this.resultQuery=resultQuery;
