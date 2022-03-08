@@ -52,7 +52,7 @@ public class QueryController {
 	}
 	@PostMapping("/testQuery")
 	public String testQuery(@ModelAttribute("table") Table table) {
-		queryService.testQuery(table);
+		//queryService.testQuery(table);
 		return "result";
 	}
 }

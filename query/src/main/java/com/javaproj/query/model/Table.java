@@ -1,5 +1,8 @@
 package com.javaproj.query.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Table {
 	private String tableName;
 	private String fieldName;
@@ -8,6 +11,9 @@ public class Table {
 	private String operator;
 	private String logicaloperator;
 	private String value;
+	private String aggrfunc;
+	private String aggrcolumnName;
+	private String aggraliasName;
 	private String resultQuery;
 	private String orderColumn;
 	private String orderValue;
@@ -41,6 +47,18 @@ public class Table {
 	public String getOrderValue() {
 		return orderValue;
 	}
+	
+	public String getAggrfunc() {
+		return aggrfunc;
+	}
+	public String getAggrcolumnName() {
+		return aggrcolumnName;
+	}
+	public String getAggraliasName() {
+		return aggraliasName;
+	}
+
+	
 	public String getErrormsg() {
 		return errormsg;
 	}
@@ -76,6 +94,17 @@ public class Table {
 	public void setOrderValue(String orderValue) {
 		this.orderValue=orderValue;
 	}
+	
+	public void setAggrfunc(String aggrfunc) {
+		this.aggrfunc=aggrfunc;
+	}
+	public void setAggrcolumnName(String aggrcolumnName) {
+		this.aggrcolumnName=aggrcolumnName;
+	}
+	public void setAggraliasName(String aggraliasName) {
+		this.aggraliasName=aggraliasName;
+	}
+	
 	public void setErrormsg(String errormsg) {
 		this.errormsg=errormsg;
 	}

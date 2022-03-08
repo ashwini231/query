@@ -10,17 +10,24 @@
  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 </head>
 <body>
-	<script type="text/javascript">
-	$('document').ready(function() {
-		$("#row1").hide();
-		$("#row2").hide();
-	  $("#add").click(function() {
-	      $("#row1").show();
-	      $("#row2").show();
-	   });
-	})
-</script>
+<script type="text/javascript" th:inline="javascript">
+$(document).ready(function(){ 
+	let cta=1, ctw=1;
+	for (let i = 1; i <= 9; i++) {
+		$("#aggr"+i).hide();
+		$("#where"+i).hide();
+	}
+	$("#aggr_add").click(function(){
+	    $("#aggr"+cta).show();
+	    cta=cta+1;
+	});
+	$("#where_add").click(function(){
+	    $("#where"+ctw).show();
+	    ctw=ctw+1;
+	});
+});
 
+</script>
 	<div class="container">
 		<h2>Query Generator</h2>
 
@@ -37,15 +44,66 @@
 		</tr>
 		</tbody>
 		</table>
+		<br>Aggregate Function<br><br>
+		<table border="1" id="tb2">
+		<tbody>
+		<tr>
+		<th>Aggregate Function</th>
+		<th>Column Name</th>
+		<th>Alias Name</th>
+		</tr>
+		<tr>
+		<td>
+		<select th:field="*{aggrfunc}">
+         	<option value="">--</option>
+         	<option value=" count "> count </option>
+         	<option value=" sum ">sum</option>
+         	<option value=" max ">max</option>
+         	<option value=" min ">min</option>
+         	<option value=" avg ">avg</option>
+         </select>
+		</td>
+		<td>
+		<select th:field="*{aggrcolumnName}">
+                <option value=""> -- </option>
+                <option value=" * "> * </option>
+                <option th:each="tdata : ${data}" th:value="${tdata.column_name}" th:utext="${tdata.column_name}"/>
+         </select></td>
+         <td><input type="text" th:field="*{aggraliasName}" placeholder="Alias Name"></td>
+         <td><input type="button" id="aggr_add" value=" + "> </td>
+         </tr>
+         <tr th:each="i: ${#numbers.sequence(1, 9)}" th:id="'aggr'+${ i }">
+		<td>
+		<select th:field="*{aggrfunc}">
+         	<option value="">--</option>
+         	<option value=" count "> count </option>
+         	<option value=" sum ">sum</option>
+         	<option value=" max ">max</option>
+         	<option value=" min ">min</option>
+         	<option value=" avg ">avg</option>
+         </select>
+		</td>
+		<td>
+		<select th:field="*{aggrcolumnName}">
+                <option value=""> -- </option>
+                <option value=" * "> * </option>
+                <option th:each="tdata : ${data}" th:value="${tdata.column_name}" th:utext="${tdata.column_name}"/>
+         </select></td>
+         <td><input type="text" th:field="*{aggraliasName}" placeholder="Alias Name"></td>
+         </tr>
+		</table>
+		
 		<br>Condition<br><br>
 		<table border="1" id="tb">
 		<tbody>
 		<tr>
+		<th>Logical Operator</th>
 		<th>Column Name</th>
 		<th>Operator</th>
 		<th>Value</th>
 		</tr>
 		<tr>
+		<td></td>
 		<td>
 		<select th:field="*{columnName}">
                 <option value=""> -- </option>
@@ -63,15 +121,10 @@
          	<option value=" <=> "> <=> </option>
          </select>
          </td>
-         <td>
-         <input type="text" th:field="*{value}" placeholder="Value">
-         </td>
-         <td>
-         <input type="button" id="add" value=" + "/>
-         </td>
+         <td><input type="text" th:field="*{value}" placeholder="Value"></td>
+         <td><input type="button" id="where_add" value=" + "> </td>
          </tr>
-         <tr id="row1">
-         <td>Logical Operator</td>
+         <tr th:each="i: ${#numbers.sequence(1, 9)}" th:id="'where'+${ i }">
          <td>
          <select th:field="*{logicaloperator}">
          	<option value="">--</option>
@@ -79,8 +132,6 @@
          	<option value=" OR "> OR </option>
          </select>
          </td>
-         </tr>
-         <tr id="row2">
 		<td>
 		<select th:field="*{columnName}">
                 <option value=""> -- </option>

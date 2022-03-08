@@ -2,7 +2,10 @@ package com.javaproj.query.service;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.javaproj.query.model.*;
@@ -14,6 +17,7 @@ public class QueryServiceImpl implements QueryService{
 	private TableDataRepository tabledataRepository ;
 	@Autowired
 	private TablesRepository tablesRepository ;
+	private EntityManager em;
 	
 	public boolean validateAliasName(String name){
 		if(name.matches("[a-zA-Z0-9_]+")){
@@ -23,6 +27,9 @@ public class QueryServiceImpl implements QueryService{
 	}
 	public String getFinalField(Table table){
 		String str="";
+		if(table.getFieldName()==null){
+			return "";
+		}
 		String[] arr1 = table.getFieldName().split(",",-2);
 		String[] arr2 = table.getAliasName().split(",",-2);
 
@@ -40,6 +47,9 @@ public class QueryServiceImpl implements QueryService{
 					break;
 				}
 			}
+		}
+		if(!getAggrFunction(table).isEmpty()){
+			str+=", ";
 		}
 		return str;
 	}
@@ -68,18 +78,35 @@ public class QueryServiceImpl implements QueryService{
 			return "";
 		}
 	}
+	public String getAggrFunction(Table table){
+		String str="";
+		String[] arr1 = table.getAggrfunc().split(",",-2);
+		String[] arr2 = table.getAggrcolumnName().split(",",-2);
+		String[] arr3 = table.getAggraliasName().split(",",-2);
+		for(int i=0;i<arr1.length;i++){
+			if(!(arr1[i].isEmpty())){
+				str+=arr1[i]+" ("+arr2[i]+") ";
+				if(!(arr3[i].isEmpty())){
+					str+="as "+arr3[i];
+				}
+				if(!(arr1[i+1].isEmpty())){
+					str+=", ";
+				}
+			}		
+		}
+		return str;
+	}
 	public void generateQuery(Table table){
-			String sql="select "+getFinalField(table)+" from "+table.getTableName()+getWhereCondition(table)+getOrderBy(table)+";";
+			String sql="select "+getFinalField(table)+ getAggrFunction(table)+" from "+table.getTableName()+getWhereCondition(table)+getOrderBy(table)+";";
 			table.setResultQuery(sql);
-		
+		    //testQuery();
 	}
-	public void testQuery(Table table){
-		
-	}
+
 	public List<TableMetaData> allTableMetaData(Table table){
 		return tabledataRepository.findAllData(table.getTableName());
 	}
 	public List<Tables> allTables(Database database){
 		return tablesRepository.findAllTables(database.getDbname());
 	}
+	
 }
