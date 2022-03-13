@@ -15,7 +15,7 @@
 		<form action="#" th:action="@{/tableName}" th:object="${database}"  method="POST" >
 		<input type="text" th:field="*{ip}" placeholder="URL" class="form-control mb-4 col-4">
 		<input type="text" th:field="*{username}" placeholder="Username" class="form-control mb-4 col-4">
-		<input type="text" th:field="*{password}" placeholder="Password" class="form-control mb-4 col-4">
+		<input type="password" th:field="*{password}" placeholder="Password" class="form-control mb-4 col-4">
 		<input type="text" th:field="*{dbname}" placeholder="Database Name" class="form-control mb-4 col-4">
 		<input type="text" th:field="*{portno}" placeholder="Port Number" class="form-control mb-4 col-4">
 		<br><br><button type="submit" class="btn btn-info col-2">Submit</button>

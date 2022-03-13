@@ -15,6 +15,7 @@ public class Table {
 	private String aggrcolumnName;
 	private String aggraliasName;
 	private String resultQuery;
+	public List<String> resultSet=new ArrayList<String>();
 	private String orderColumn;
 	private String orderValue;
 	private String errormsg;
@@ -56,15 +57,16 @@ public class Table {
 	}
 	public String getAggraliasName() {
 		return aggraliasName;
-	}
-
-	
+	}	
 	public String getErrormsg() {
 		return errormsg;
 	}
 	public String getResultQuery() {
 		return resultQuery;
-	}
+	}/*
+	public String getResultSet() {
+		return resultSet;
+	}*/
 	
 	
 	public void setTableName(String tableName) {
@@ -111,6 +113,10 @@ public class Table {
 	public void setResultQuery(String resultQuery) {
 		this.resultQuery=resultQuery;
 	}
+	/*
+	public void setResultSet(String resultSet) {
+		this.resultSet=resultSet;
+	}*/
 	public void setFlag(boolean flag){
 		this.flag=flag;
 		

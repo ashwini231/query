@@ -1,11 +1,16 @@
 package com.javaproj.query.service;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-
+import javax.persistence.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
+//import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.javaproj.query.model.*;
@@ -17,7 +22,8 @@ public class QueryServiceImpl implements QueryService{
 	private TableDataRepository tabledataRepository ;
 	@Autowired
 	private TablesRepository tablesRepository ;
-	private EntityManager em;
+	@Autowired
+	private EntityManager entityManager;
 	
 	public boolean validateAliasName(String name){
 		if(name.matches("[a-zA-Z0-9_]+")){
@@ -85,7 +91,7 @@ public class QueryServiceImpl implements QueryService{
 		String[] arr3 = table.getAggraliasName().split(",",-2);
 		for(int i=0;i<arr1.length;i++){
 			if(!(arr1[i].isEmpty())){
-				str+=arr1[i]+" ("+arr2[i]+") ";
+				str+=arr1[i]+"("+arr2[i]+") ";
 				if(!(arr3[i].isEmpty())){
 					str+="as "+arr3[i];
 				}
@@ -96,12 +102,21 @@ public class QueryServiceImpl implements QueryService{
 		}
 		return str;
 	}
-	public void generateQuery(Table table){
-			String sql="select "+getFinalField(table)+ getAggrFunction(table)+" from "+table.getTableName()+getWhereCondition(table)+getOrderBy(table)+";";
-			table.setResultQuery(sql);
-		    //testQuery();
+	@SuppressWarnings("unchecked")
+	public void executeSelectQuery(String sqlQuery, Table table) {	
+		Query q = entityManager.createNativeQuery(sqlQuery);
+		List<Object[]> result= q.getResultList();
+		for(Object[] r : result){
+			table.resultSet.add(Arrays.toString(r));
+			System.out.println(Arrays.toString(r));
+		}
 	}
-
+	
+	public void generateQuery(Table table){
+		String sql="Select "+getFinalField(table)+ getAggrFunction(table)+" from "+table.getTableName()+getWhereCondition(table)+getOrderBy(table)+";";
+		table.setResultQuery(sql);
+	   executeSelectQuery(sql,table);
+	}
 	public List<TableMetaData> allTableMetaData(Table table){
 		return tabledataRepository.findAllData(table.getTableName());
 	}

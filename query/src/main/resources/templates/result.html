@@ -6,5 +6,10 @@
 </head>
 <body>
 <h2 th:text="${table.resultQuery}"></h2>
+<br>
+<div th:if="${table.resultSet != null}">
+    <h2>Result</h2>
+    <p th:each="res : ${table.resultSet}" th:text="${res}"></p>
+</div>
 </body>
 </html>

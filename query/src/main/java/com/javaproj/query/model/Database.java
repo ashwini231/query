@@ -37,5 +37,5 @@ public class Database {
 	public void setPortno(String portno){
 		this.portno=portno;
 	}
-	
+
 }

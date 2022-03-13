@@ -56,17 +56,17 @@ $(document).ready(function(){
 		<td>
 		<select th:field="*{aggrfunc}">
          	<option value="">--</option>
-         	<option value=" count "> count </option>
-         	<option value=" sum ">sum</option>
-         	<option value=" max ">max</option>
-         	<option value=" min ">min</option>
-         	<option value=" avg ">avg</option>
+         	<option value=" count"> count </option>
+         	<option value=" sum">sum</option>
+         	<option value=" max">max</option>
+         	<option value=" min">min</option>
+         	<option value=" avg">avg</option>
          </select>
 		</td>
 		<td>
 		<select th:field="*{aggrcolumnName}">
                 <option value=""> -- </option>
-                <option value=" * "> * </option>
+                <option value="*">*</option>
                 <option th:each="tdata : ${data}" th:value="${tdata.column_name}" th:utext="${tdata.column_name}"/>
          </select></td>
          <td><input type="text" th:field="*{aggraliasName}" placeholder="Alias Name"></td>
@@ -76,17 +76,17 @@ $(document).ready(function(){
 		<td>
 		<select th:field="*{aggrfunc}">
          	<option value="">--</option>
-         	<option value=" count "> count </option>
-         	<option value=" sum ">sum</option>
-         	<option value=" max ">max</option>
-         	<option value=" min ">min</option>
-         	<option value=" avg ">avg</option>
+         	<option value=" count"> count </option>
+         	<option value=" sum">sum</option>
+         	<option value=" max">max</option>
+         	<option value=" min">min</option>
+         	<option value=" avg">avg</option>
          </select>
 		</td>
 		<td>
 		<select th:field="*{aggrcolumnName}">
                 <option value=""> -- </option>
-                <option value=" * "> * </option>
+                <option value="*"> * </option>
                 <option th:each="tdata : ${data}" th:value="${tdata.column_name}" th:utext="${tdata.column_name}"/>
          </select></td>
          <td><input type="text" th:field="*{aggraliasName}" placeholder="Alias Name"></td>

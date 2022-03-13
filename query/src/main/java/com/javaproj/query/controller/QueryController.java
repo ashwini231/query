@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.javaproj.query.datasource.DataSourceConfig;
 import com.javaproj.query.model.*;
 import com.javaproj.query.repository.TableDataRepository;
 import com.javaproj.query.service.QueryService;
@@ -31,6 +32,8 @@ public class QueryController {
 
 	@PostMapping("/tableName")
 	public String showTables(@ModelAttribute("database") Database database,Model model) {
+		DataSourceConfig config= new DataSourceConfig();
+		config.getDataSource();
 		Table table = new Table();
 		model.addAttribute("table", table);
 		List<Tables> tables= queryService.allTables(database);
@@ -39,7 +42,7 @@ public class QueryController {
 	}
 	
 	@PostMapping("/select")
-	public String select(@ModelAttribute("table") Table table, Model model) {
+	public String select( @ModelAttribute("table") Table table, Model model) {
 		List<TableMetaData> data= queryService.allTableMetaData(table);
 		model.addAttribute("data",data);
 		return "index";
@@ -50,10 +53,6 @@ public class QueryController {
 		queryService.generateQuery(table);
 		return "result";
 	}
-	@PostMapping("/testQuery")
-	public String testQuery(@ModelAttribute("table") Table table) {
-		//queryService.testQuery(table);
-		return "result";
-	}
+
 }
  
